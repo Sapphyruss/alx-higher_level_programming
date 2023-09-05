@@ -1,0 +1,11 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+
+# adding 2 integers
+>>> add_integer(2, 3)
+5
+>>> add_integer(0, 0)
+0
+>>> add_integer(-2, 3)
+1
+>>> add_integer(2, -3)
+-1
