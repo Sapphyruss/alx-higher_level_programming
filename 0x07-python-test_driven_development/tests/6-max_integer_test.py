@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unit tests for max_integer([..])."""
+"""Unittests for max_integer([..])."""
 
 import unittest
 max_integer = __import__('6-max_integer').max_integer
@@ -9,7 +9,7 @@ class TestMaxInteger(unittest.TestCase):
     """Define unittests for max_integer([..])."""
 
     def test_ordered_list(self):
-        """Test  ordered list of integers."""
+        """Test ordered list of integers."""
         ordered = [1, 2, 3, 4]
         self.assertEqual(max_integer(ordered), 4)
 
@@ -29,14 +29,14 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(max_integer(empty), None)
 
     def test_one_element_list(self):
-        """Test  list with a single element."""
-        one_element = [7]
-        self.assertEqual(max_integer(one_element), 7)
+        """Test list with a single element."""
+        one_element = [1]
+        self.assertEqual(max_integer(one_element), 1)
 
     def test_floats(self):
         """Test list of floats."""
         floats = [1.54, 6.34, -9.124, 15.4, 6.0]
-        self.assertEqual(max_integer(floats), 15.5)
+        self.assertEqual(max_integer(floats), 15.4)
 
     def test_ints_and_floats(self):
         """Test list of ints and floats."""
@@ -44,14 +44,14 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(max_integer(ints_and_floats), 15.4)
 
     def test_string(self):
-        """Test string."""
-        string = "worrrrd"
+        """Test a string."""
+        string = "rrreally"
         self.assertEqual(max_integer(string), 'r')
 
     def test_list_of_strings(self):
-        """Test list of strings."""
-        strings = ["Hello", "its", "me", "Mario"]
-        self.assertEqual(max_integer(strings), "me")
+        """Test a list of strings."""
+        strings = ["Hello", "its", "me", "Noone"]
+        self.assertEqual(max_integer(strings), "Noone")
 
     def test_empty_string(self):
         """Test empty string."""
