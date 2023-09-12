@@ -3,9 +3,14 @@
 
 
 def number_of_lines(filename=""):
-    """Return the number of lines in the text file."""
-    lines = 0
-    with open(filename) as f:
+    """number of lines from file
+    args:
+        filename: file to read
+    return:
+        number of lines
+    """
+    line_num = 0
+    with open(filename, encoding="utf-8") as f:
         for line in f:
-            lines += 1
-    return lines
+            line_num += 1
+    return line_num
