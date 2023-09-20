@@ -16,10 +16,10 @@ class Rectangle(Base):
             y : y coordinate of the new Rectangle.
             id : The identity of the new Rectangle.
         Raises:
-            TypeError: If either  width or height is not an integer.
-            ValueError: If either width or height <= 0.
-            TypeError: If either x or y is not an int.
-            ValueError: If either x or y < 0.
+            TypeError: If either  width or height are not integers.
+            ValueError: If either width or height are <= 0.
+            TypeError: If either x or y are not integers.
+            ValueError: If either x or y are < 0.
         """
         self.width = width
         self.height = height
@@ -142,7 +142,7 @@ class Rectangle(Base):
                     self.y = v
 
     def to_dictionary(self):
-        """Returns the dict representation of a Rectangle."""
+        """Returns the dict representation of the Rectangle."""
         return {
             "id": self.id,
             "width": self.width,
