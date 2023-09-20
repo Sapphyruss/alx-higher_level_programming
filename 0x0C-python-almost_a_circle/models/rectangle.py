@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+"""Defines a rectangle class."""
 from models.base import Base
 
 
@@ -10,13 +10,16 @@ class Rectangle(Base):
         """Init a new Rectangle.
 
         Args:
-            width : width of the new Rectangle.
-            height : height of the new Rectangle.
-            x : coordinate of the new Rectangle.
-            y : coordinate of the new Rectangle.
-            id : identity of the new Rectangle.
+            width : Width of the new Rectangle.
+            height : Height of the new Rectangle.
+            x : x coordinate of the new Rectangle.
+            y : y coordinate of the new Rectangle.
+            id : The identity of the new Rectangle.
         Raises:
-            TypeError: If
+            TypeError: If either  width or height is not an integer.
+            ValueError: If either width or height <= 0.
+            TypeError: If either x or y is not an int.
+            ValueError: If either x or y < 0.
         """
         self.width = width
         self.height = height
@@ -26,15 +29,15 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """Set the width of the Rectangle."""
+        """Get the width of the Rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
         if type(value) != int:
-            raise TypeError("width must be int")
+            raise TypeError("width must be an integer")
         if value <= 0:
-            raise ValueError("width must be positive")
+            raise ValueError("width must be > 0")
         self.__width = value
 
     @property
@@ -45,9 +48,9 @@ class Rectangle(Base):
     @height.setter
     def height(self, value):
         if type(value) != int:
-            raise TypeError("height must be an int")
+            raise TypeError("height must be an integer")
         if value <= 0:
-            raise ValueError("height must be positive")
+            raise ValueError("height must be > 0")
         self.__height = value
 
     @property
@@ -58,9 +61,9 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         if type(value) != int:
-            raise TypeError("x must be int")
+            raise TypeError("x must be an integer")
         if value < 0:
-            raise ValueError("x must be positive")
+            raise ValueError("x must be >= 0")
         self.__x = value
 
     @property
@@ -71,9 +74,9 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         if type(value) != int:
-            raise TypeError("y must be an int")
+            raise TypeError("y must be an integer")
         if value < 0:
-            raise ValueError("y must be positive or = 0")
+            raise ValueError("y must be >= 0")
         self.__y = value
 
     def area(self):
@@ -96,13 +99,13 @@ class Rectangle(Base):
         """Update the Rectangle.
 
         Args:
-            *args : New attribute values.
-                - 1st argument represents id attribute
-                - 2nd argument represents width
-                - 3rd argument represent height
-                - 4th argument represents x
-                - 5th argument represents y
-            **kwargs (dictionary): New key/value pairs of the attributes
+            *args (ints): New attribute values.
+                - 1st argument represents id attr
+                - 2nd argument represents width attr
+                - 3rd argument represent height attr
+                - 4th argument represents x attr
+                - 5th argument represents y attr
+            **kwargs (dictionary): The new key/value pairs of attributes.
         """
         if args and len(args) != 0:
             a = 0
@@ -139,7 +142,7 @@ class Rectangle(Base):
                     self.y = v
 
     def to_dictionary(self):
-        """Return the dict representation of a Rectangle."""
+        """Returns the dict representation of a Rectangle."""
         return {
             "id": self.id,
             "width": self.width,
