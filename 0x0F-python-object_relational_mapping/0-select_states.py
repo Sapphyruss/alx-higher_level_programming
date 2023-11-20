@@ -1,9 +1,29 @@
 #!/usr/bin/python3
-# Lists all states from the database hbtn_0e_0_usa.
+'''Define function'''
 import MySQLdb
 
-if __name__ == "__main__":
-    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+
+def main():
+    # make a connection to db
+    db = MySQLdb.connect(host='localhost',
+                         port=3306,
+                         user=argv[1],
+                         passwd=argv[2],
+                         database=argv[3])
+
+    # create a cursor
     c = db.cursor()
-    c.execute("SELECT * FROM `states`")
-    [print(state) for state in c.fetchall()]
+
+    # execute the query
+    c.execute('SELECT * FROM states ORDER BY id ASC')
+    rows = c.fetchall()
+    for i in rows:
+        print(i)
+
+    # close all cursors and database
+    c.close()
+    db.close()
+
+if __name__ == "__main__":
+    from sys import argv
+    main()
