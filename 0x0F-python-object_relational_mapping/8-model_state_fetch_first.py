@@ -1,35 +1,19 @@
 #!/usr/bin/python3
-# print 1st state object from the database
+"""lists first State objects from database """
+from sys import argv
+from model_state import Base, State
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 
-if __name__ == "__main__":
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import Session
-    from sys import argv
-    from model_state import Base, State
-    from sqlalchemy.engine.url import URL
 
-    # url
-    url = {'drivername': 'mysql+mysqldb',
-           'host': 'localhost',
-           'port': '3306',
-           'username': argv[1],
-           'password': argv[2],
-           'database': argv[3]}
-
-    c_url = URL(**url)
-
-    # create engine, metadata for stored objects
-    engine = create_engine(c_url, pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-
-    # session
-    session = Session(engine)
-
-    try:
-        first = session.query(State).first()
-        print("{}: {}".format(first.id, first.name))
-    except:
+if __name__ == '__main__':
+    engine = create_engine(f'mysql+mysqldb://{argv[1]}:{argv[2]} \
+        @localhost/{argv[3]}', pool_pre_ping=True)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    row = session.query(State).first()
+    if row:
+        print(f'{row.id}: {row.name}')
+    else:
         print('Nothing')
-
-    # close
     session.close()
