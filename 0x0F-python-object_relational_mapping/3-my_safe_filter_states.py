@@ -1,37 +1,17 @@
 #!/usr/bin/python3
-"""States by user input"""
+"""Write a script that takes in an argument"""
+from sys import argv
 import MySQLdb
 
 
-def main():
-
-    if len(argv) == 5:
-        # connect
-        db = MySQLdb.connect(host='localhost',
-                             port=3306,
-                             user=argv[1],
-                             passwd=argv[2],
-                             db=argv[3])
-        # cursor
-        c = db.cursor()
-
-        # execute query
-        c.execute("SELECT * FROM states WHERE name = %s\
-        ORDER BY states.id ASC", (argv[4], ))
-
-        # fetch
-        rows = c.fetchall()
-
-        # print
-        for row in rows:
-            print(row)
-
-        # close
-        c.close()
-        db.close()
-    else:
-        return
-
 if __name__ == "__main__":
-    from sys import argv
-    main()
+    name = argv[1]
+    data = argv[3]
+    search = argv[4]
+    db = MySQLdb.connect(user=name, passwd=argv[2], db=data)
+    cur = db.cursor()
+    query = "SELECT * FROM states WHERE name = %s"
+    cur.execute(query, (search,))
+    [print(row) for row in cur.fetchall()]
+    cur.close()
+    db.close()
