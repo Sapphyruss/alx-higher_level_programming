@@ -1,24 +1,17 @@
 #!/usr/bin/python3
-"""
-POST request
-"""
+"""takes in a letter and sends a POST request"""
+import requests
+from sys import argv
 
 
 if __name__ == "__main__":
-    from sys import argv
-    import requests
-
-    if len(argv) == 1:
-        q = ''
-    else:
-        q = argv[1]
-
-    r = requests.post('http://0.0.0.0:5000/search_user', data={'q': q})
+    letter = {"q": argv[1] if len(argv) > 1 else ""}
+    html = requests.post('http://0.0.0.0:5000/search_user', letter)
     try:
-        out = r.json()
-        if out:
-            print('[{}] {}'.format(out['id'], out['name']))
+        response = html.json()
+        if response:
+            print(f'[{response.get("id")}] {response.get("name")}')
         else:
             print('No result')
-    except:
+    except ValueError:
         print('Not a valid JSON')
