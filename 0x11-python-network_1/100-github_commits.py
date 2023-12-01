@@ -1,12 +1,19 @@
 #!/usr/bin/python3
-"""takes my GitHub credentials"""
-import requests
-from sys import argv
+"""
+Github commits
+"""
 
 
-if __name__ == "__main__":
-    git_api = f'https://api.github.com/repos/{argv[2]}/{argv[1]}/commits'
-    commits = requests.get(git_api).json()[:10]
-    for commit in commits:
-        name = commit.get("commit").get("author").get("name")
-        print(f'{commit.get("sha")}: {name}')
+if __name__ == '__main__':
+    import requests
+    from sys import argv
+
+    name = argv[2]
+    repo = argv[1]
+    params = {'per_page': 10}
+    r = requests.get('https://api.github.com/repos/{}/{}/commits'
+                     .format(name, repo), params=params)
+    r = r.json()
+    for arg in r:
+        print("{}: {}".format(arg.get('sha'),
+                              arg.get('commit').get('author').get('name')))
