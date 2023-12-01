@@ -1,13 +1,10 @@
 #!/usr/bin/python3
-"""
-check page status
-"""
+"""script that fetches hbtn status page"""
+import requests
 
 
 if __name__ == "__main__":
-    import requests
-
-    r = requests.get('https://intranet.hbtn.io/status')
+    html = requests.get('https://alx-intranet.hbtn.io/status').text
     print("Body response:")
-    print("\t- type: {}".format(type(r.text)))
-    print("\t- content: {}".format(r.text))
+    print(f'\t- type: {type(html)}')
+    print(f'\t- content: {html}')
